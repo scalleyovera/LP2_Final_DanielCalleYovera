@@ -10,11 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -43,6 +42,28 @@ public class ProductoController {
         return "menu";
 
     }
+
+    @GetMapping("/buscar")
+    public String buscarPorId(@RequestParam("id") Integer id, Model model, HttpSession sesion) {
+        String correo = sesion.getAttribute("usuario").toString();
+        model.addAttribute("usuarioEn", correo);
+
+        try {
+            ProductoEntity producto = productoService.encontrarPorId(id);
+
+            if (producto != null) {
+                model.addAttribute("productos", Arrays.asList(producto));
+            } else {
+                model.addAttribute("productos", Collections.emptyList());
+            }
+
+        } catch (Exception e) {
+            model.addAttribute("productos", Collections.emptyList());
+        }
+
+        return "menu";
+    }
+
 
 
     @GetMapping("/detalle_producto/{id}")

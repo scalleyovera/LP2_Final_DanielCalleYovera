@@ -11,9 +11,21 @@
 <div class="container">
 
     <h3 th:text=" 'Bienvenido ' + ${usuarioEn} "></h3>
-    <h2>Lista productos</h2>
-    <a class="btn btn-outline-danger ml-2" th:href="@{/logout}" role="button">Logout</a>
-    <a th:href="@{/registrar_producto}" class="btn btn-primary">Registrar producto</a>
+    <h3>Lista productos</h3>
+
+    <form action="/buscar" method="GET">
+        <label for="id">ID del producto:</label>
+        <div class="container">
+            <input type="number" id="id" name="id" required>
+            <input type="submit" value="Buscar">
+        </div>
+        
+    </form>
+    <br>
+    <div class="container">
+        <a class="btn btn-outline-danger ml-2" th:href="@{/logout}" role="button">Logout</a>
+        <a th:href="@{/registrar_producto}" class="btn btn-primary">Registrar producto</a>
+    </div>
     <!-- Tabla de productos -->
     <table class="table mt-4">
         <thead>

@@ -44,13 +44,12 @@ public class ProductoServiceImpl implements ProductoService {
         if(productoEncontrado.isPresent()){
             ProductoEntity prodEditado = productoEncontrado.get();
 
-            // Actualizar los campos del usuario encontrado con los nuevos valores
             prodEditado.setNombreProducto(producto.getNombreProducto());
             prodEditado.setPrecio(producto.getPrecio());
             prodEditado.setStock(producto.getStock());
             prodEditado.setCategoria(producto.getCategoria());
 
-            // Guardar los cambios en la base de datos
+
             productoRepository.save(prodEditado);
         }
 
