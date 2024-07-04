@@ -34,7 +34,7 @@ public class ProductoPdf extends AbstractPdfView {
     UsuarioService usuarioService;
 
     public ProductoPdf() {
-        // Constructor vacío
+        
     }
 
 
