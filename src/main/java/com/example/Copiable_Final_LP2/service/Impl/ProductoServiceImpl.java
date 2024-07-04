@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -37,6 +38,21 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public void editarProducto(ProductoEntity producto, Integer id) {
+
+        Optional<ProductoEntity> productoEncontrado = productoRepository.findById(id);
+
+        if(productoEncontrado.isPresent()){
+            ProductoEntity prodEditado = productoEncontrado.get();
+
+            // Actualizar los campos del usuario encontrado con los nuevos valores
+            prodEditado.setNombreProducto(producto.getNombreProducto());
+            prodEditado.setPrecio(producto.getPrecio());
+            prodEditado.setStock(producto.getStock());
+            prodEditado.setCategoria(producto.getCategoria());
+
+            // Guardar los cambios en la base de datos
+            productoRepository.save(prodEditado);
+        }
 
     }
 }

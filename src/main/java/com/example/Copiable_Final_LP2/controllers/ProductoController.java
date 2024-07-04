@@ -81,9 +81,18 @@ public class ProductoController {
     public String showEditarProducto(Model model, @PathVariable Integer id){
         ProductoEntity producto = productoService.encontrarPorId(id);
         model.addAttribute("producto", producto);
+
+        List<CategoriaEntity> listaCategorias = categoriaRepository.findAll();
+        model.addAttribute("listaCategorias", listaCategorias);
+
         return "editar_producto";
     }
 
+    @PostMapping("/editar_producto/{id}")
+    public String editarProducto(@ModelAttribute ProductoEntity producto, @PathVariable Integer id){
+        productoService.editarProducto(producto, id);
+        return "redirect:/menu";
+    }
 
 
 
