@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Producto</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Registro de Producto</h2>
+
+    <form th:action="@{/registrar_producto}" th:object="${producto}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre Producto:</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombreProducto}" placeholder="Ingrese nombre producto" required>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio Producto:</label>
+            <input type="number" class="form-control" id="precio" th:field="*{precio}" placeholder="Ingrese precio producto" required>
+        </div>
+        <div class="form-group">
+            <label for="cantidad">Stock:</label>
+            <input type="number" class="form-control" id="cantidad" th:field="*{stock}" placeholder="Ingrese cantidad producto" required>
+        </div>
+        <div class="form-group">
+            <label for="categoria">Seleccione Categoria:</label>
+            <select  name="itemId" id="categoria" class="form-control" th:field="*{categoria.categoriaId}">
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option th:each="item : ${listaCategorias}" th:value="${item.categoriaId}" th:text="${item.nombre}"></option>
+            </select>
+        </div>
+
+        <a th:href="@{/menu}" class="btn btn-secondary">Regresar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+</body>
+</html>

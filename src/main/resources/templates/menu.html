@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu principal</title>
+    <!-- Estilos de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h3 th:text=" 'Bienvenido ' + ${usuarioEn} "></h3>
+    <h2>Lista productos</h2>
+    <a class="btn btn-outline-danger ml-2" th:href="@{/logout}" role="button">Logout</a>
+    <a th:href="@{/registrar_producto}" class="btn btn-primary">Registrar producto</a>
+    <!-- Tabla de productos -->
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod : ${productos}">
+            <td th:text="${prod.productoId}"></td>
+            <td th:text="${prod.nombreProducto}"></td>
+            <td th:text="${prod.precio}"></td>
+            <td th:text="${prod.stock}"></td>
+            <td th:text="${prod.categoria.nombre}"></td>
+            <td>
+                <a th:href="@{/detalle_producto/{id}(id=${prod.productoId})}" class="btn btn-info">Ver</a> |
+                <a th:href="@{/editar_producto/{id}(id=${prod.productoId})}" class="btn btn-warning">Editar</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
