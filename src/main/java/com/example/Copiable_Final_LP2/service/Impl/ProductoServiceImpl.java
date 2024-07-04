@@ -31,8 +31,8 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public void eliminarProducto(Integer id, Model model) {
-
+    public void eliminarProducto(Integer id) {
+        productoRepository.deleteById(id);
     }
 
     @Override

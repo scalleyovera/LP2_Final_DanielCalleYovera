@@ -71,6 +71,21 @@ public class ProductoController {
         return "redirect:/menu";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteProducto(Model model, @PathVariable("id") Integer id){
+        productoService.eliminarProducto(id);
+        return "redirect:/menu";
+    }
+
+    @GetMapping("/editar_producto/{id}")
+    public String showEditarProducto(Model model, @PathVariable Integer id){
+        ProductoEntity producto = productoService.encontrarPorId(id);
+        model.addAttribute("producto", producto);
+        return "editar_producto";
+    }
+
+
+
 
 
 
