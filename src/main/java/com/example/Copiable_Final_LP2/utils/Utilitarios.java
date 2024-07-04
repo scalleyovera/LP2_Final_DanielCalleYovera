@@ -39,4 +39,7 @@ public class Utilitarios {
         return BCrypt.checkpw(password,hashPassword );
     }
 
+
+
+
 }

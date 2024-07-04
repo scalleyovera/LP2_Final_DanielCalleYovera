@@ -4,6 +4,7 @@ import com.example.Copiable_Final_LP2.entities.UsuarioEntity;
 import com.example.Copiable_Final_LP2.repository.UsuarioRepository;
 import com.example.Copiable_Final_LP2.service.UsuarioService;
 import com.example.Copiable_Final_LP2.utils.Utilitarios;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (!Utilitarios.verificarPassword(usuario.getPassword(), usuarioEncontradoPorCorreo.getPassword())){
             return false;
         }
+        sesion.setAttribute("usuarioEnSesion", usuario);
         sesion.setAttribute("usuario", usuarioEncontradoPorCorreo.getCorreo());
         return true;
     }
@@ -50,5 +52,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioEntity buscarUsuarioPorCorreo(String correo) {
         return repo.findByCorreo(correo);
+    }
+
+    public String mostrarNombresUsuario(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UsuarioEntity usuarioEnSesion = (UsuarioEntity) session.getAttribute("usuarioEnSesion");
+
+        return usuarioEnSesion.getNombre() + " " + usuarioEnSesion.getApellidos();
     }
 }
